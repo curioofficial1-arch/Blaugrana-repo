@@ -1,0 +1,6 @@
+{
+  "name": "Barça Fan Central",
+  "description": "A modern Barcelona-inspired fan experience featuring matchday countdowns, squad spotlights, breaking news, match centers, and community fan hubs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

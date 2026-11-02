@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public profile of an FC Barcelona fan / Culer member.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User UID matching auth.uid",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Supporter display name or handle",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "penya": {
+          "type": "string",
+          "description": "Affiliated official FC Barcelona supporters club or Independent Culer",
+          "maxLength": 80
+        },
+        "favoritePlayer": {
+          "type": "string",
+          "description": "Favorite FC Barcelona player",
+          "maxLength": 50
+        },
+        "membershipTier": {
+          "type": "string",
+          "description": "Official club membership tier",
+          "enum": ["Soci", "Culers Premium", "Fan Culer"]
+        },
+        "membershipNumber": {
+          "type": "string",
+          "description": "Official membership pass ID number",
+          "pattern": "^[A-Z0-9-]+$",
+          "maxLength": 30
+        },
+        "country": {
+          "type": "string",
+          "description": "Supporter country / region",
+          "maxLength": 50
+        },
+        "bio": {
+          "type": "string",
+          "description": "Personal supporter bio",
+          "maxLength": 280
+        },
+        "avatarUrl": {
+          "type": "string",
+          "description": "Supporter avatar image or preset seed",
+          "maxLength": 200
+        },
+        "loyaltyPoints": {
+          "type": "number",
+          "description": "Accumulated supporter points"
+        },
+        "badges": {
+          "type": "array",
+          "description": "Array of unlocked supporter badges"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["id", "displayName", "membershipTier", "membershipNumber", "favoritePlayer", "country"]
+    },
+    "PrivateInfo": {
+      "title": "PrivateInfo",
+      "description": "Private contact info for the user",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 120
+        },
+        "emailNotifications": {
+          "type": "boolean"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Public supporter profiles accessible to the community."
+    },
+    "/users/{userId}/private/info": {
+      "schema": "PrivateInfo",
+      "description": "Private PII strictly isolated to the profile owner."
+    }
+  }
+}
